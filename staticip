@@ -1,0 +1,39 @@
+#!/bin/sh
+echo "----- Configure Static IP -----"
+sleep 3
+read -p "Enter Static IP Address: " STATICIP
+sleep 1
+read -p "Enter Netmask Address: " NETMASK
+sleep 1
+read -p "Enter Gateway Address: " GATEWAY
+sleep 1
+read -p "Enter DNS Address: " NAMESERVER
+sleep 1
+read -p "Enter DNS Search Domain: " SEARCH
+sleep 1
+sed -i "s/dhcp/static/g" /etc/network/interfaces
+echo "address $STATICIP" >> /etc/network/interfaces
+echo "netmask $NETMASK" >> /etc/network/interfaces
+echo "gateway $GATEWAY" >> /etc/network/interfaces
+sed -i "/nameserver/d" /etc/resolv.conf
+sed -i "/search/d"  /etc/resolv.conf
+echo "nameserver $NAMESERVER" >> /etc/resolv.conf
+echo "search $SEARCH" >> /etc/resolv.conf
+echo "Applying Changes…"
+sleep 5
+echo "Restarting Networking…"
+/etc/init.d/networking restart
+sleep 5
+echo "Static IP: " $STATICIP
+sleep 1
+echo "Netmask: " $NETMASK
+sleep 1
+echo "Gateway: " $GATEWAY
+sleep 1
+echo "DNS Server: " $NAMESERVER
+sleep 1
+echo "DNS Search Domain: " $SEARCH
+sleep 3
+echo "----- Static IP Configuration Complete -----"
+sleep 1
+

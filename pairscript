@@ -1,0 +1,14 @@
+#!/bin/sh
+echo "----- CCSVM Scan Engine Pairing -----"
+echo "Enabling Scan Engine..."
+sleep 5
+echo "Scan Engine Enabled"
+sleep 3
+sed -i 's/enabled="0"/enabled="1"/g' /opt/Symantec/CCSVM/nse/conf/consoles.xml
+echo "Restarting Scan Engine Service..."
+sleep 5
+service nexposeengine.rc restart
+sleep 3
+echo "----- Scan Engine Pairing Complete -----"
+sleep 3
+

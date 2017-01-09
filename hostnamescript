@@ -1,0 +1,24 @@
+#!/bin/sh
+echo "----- Configure New Hostname -----"
+read -p "Enter New Hostname: " NEWHOST
+sleep 1
+echo "New Hostname: " $NEWHOST
+sed -i "s/ccsvmhost/$NEWHOST/g" /etc/hostname
+sed -i "s/ccsvmhost/$NEWHOST/g" /etc/hosts
+sleep 1
+echo "----- Configuration Complete -----"
+sleep 1
+echo "System Reboot in 5..."
+sleep 1
+echo "4..."
+sleep 1
+echo "3..."
+sleep 1
+echo "2..."
+sleep 1
+echo "1..."
+sleep 1
+echo "System Rebooting..."
+sleep 1
+shutdown -r now
+
